@@ -1,0 +1,21 @@
+{
+  "name": "libreria",
+  "version": "1.0.0",
+  "description": "libreria",
+  "main": "app.js",
+  "scripts": {
+    "test": "test",
+    "start": "node app.js",
+    "dev": "nodemon -L app.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/carloshd25/Libreria.git"
+  },
+  "author": "carrego91@gmail.com",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/carloshd25/Libreria/issues"
+  },
+  "homepage": "https://github.com/carloshd25/Libreria#readme"
+}
