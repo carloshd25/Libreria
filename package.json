@@ -17,5 +17,17 @@
   "bugs": {
     "url": "https://github.com/carloshd25/Libreria/issues"
   },
-  "homepage": "https://github.com/carloshd25/Libreria#readme"
+  "homepage": "https://github.com/carloshd25/Libreria#readme",
+  "dependencies": {
+    "bcrypt": "^4.0.1",
+    "body-parser": "^1.19.0",
+    "dotenv": "^8.2.0",
+    "express": "^4.17.1",
+    "express-async-errors": "^3.1.1",
+    "jsonwebtoken": "^8.5.1",
+    "mongoose": "^5.9.6"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.2"
+  }
 }
