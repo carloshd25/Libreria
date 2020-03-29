@@ -23,8 +23,13 @@ exports.findBook = async (idBook) => {
 exports.listBook = async (search) => {
     let books;
     if (search) {
+        /*books = await Book.findOne({
+            nombre:search
+        });*/
         books = await Book.findOne({
-            nombre: search
+            categorias:'/'+search+'/',
+            nombre:'/'+search+'/',
+            autor:'/'+search+'/'
         });
     }
     else {
