@@ -4,13 +4,13 @@ const userService = require("./userServices");
 const userModel = require("../models/user");
 
 
-exports.authenticate = async (username, pass) => {
+exports.authenticate = async (username, password) => {
     const user = await userService.listUser(username); 
     if (!user) {
       throw new Error("User not found or does not exist");
     }
   
-    const Result = await user.comparePassword(pass);
+    const Result = await user.comparePassword(password);
     console.log(Result);
   
     if (!Result) {
@@ -22,3 +22,20 @@ exports.authenticate = async (username, pass) => {
   
     return token;
   };
+
+
+  exports.validateToken = token => {
+    const decodedToken = jwt.verify(token, config.SECRET);
+    return decodedToken;
+  };
+
+  exports.signUp = async user => {
+    const username = user.username;
+    const userExist = await userService.listUser(username);
+  
+    if (userExist) {
+      throw new Error("User already exists");
+    }
+    return await userService.createUser(user);
+  };
+
