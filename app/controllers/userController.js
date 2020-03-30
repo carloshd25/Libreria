@@ -26,7 +26,7 @@ exports.changeUser = async (req, res) => {
 
 exports.findUser = async (req, res) => {
     let idUser=req.params.UserId;
-    let searchUser=await UserService.findBook(idUser);
+    let searchUser=await UserService.findUser(idUser);
     if(!searchUser){
         res.status(401).send("User not found");
     }
@@ -43,7 +43,7 @@ exports.listUser = async (req, res) => {
         res.status(401).send("user not found");
     }
     else{
-        res.status(200).send(books);
+        res.status(200).send(users);
     }
 
 };
