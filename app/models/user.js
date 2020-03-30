@@ -1,7 +1,7 @@
 const mongoose=require('mongoose');
 const  bcrypt = require('bcryptjs');
 
-let usercheme=new mongoose.Schema({
+let userScheme=new mongoose.Schema({
     username:{
         type:String,
         required:true,
@@ -16,20 +16,20 @@ let usercheme=new mongoose.Schema({
     }
 });
 
-userShema.methods.toJSON = function () {//trae los objetos de mongoose y los convierte a .json
+userScheme.methods.toJSON = function () {//trae los objetos de mongoose y los convierte a .json
     let user = this.toObject();
         delete user.password;
         return user;
 };
 
 //función para comparar el password que toma y el encriptado
-userShema.methods.comparePassword = async function(password){
+userScheme.methods.comparePassword = async function(password){
     let result = await bcrypt.compare(password, this.password);
     return result;
 };
 
 //dispara un trigger antes de guardar 
-userShema.pre('save', async function(next){
+userScheme.pre('save', async function(next){
     const user = this;
     if (!user.isModified('password')) {
         return next(); 
@@ -42,5 +42,5 @@ userShema.pre('save', async function(next){
 
 });
 
-mongoose.model('user',bookScheme);
+mongoose.model('user',userScheme);
 module.exports=mongoose.model('user');
