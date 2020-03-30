@@ -20,11 +20,11 @@ exports.findUser = async (idUser) => {
     return searchUser;
 }
 
-exports.listUser = async (search) => {
+exports.listUser = async (username) => {
     let users;
-    if (search) {
+    if (username) {
         users = await User.findOne({
-            username:search
+            username:username
         });
     }
     else {
