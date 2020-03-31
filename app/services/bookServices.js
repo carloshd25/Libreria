@@ -23,11 +23,19 @@ exports.findBook = async (idBook) => {
 exports.listBook = async (search) => {
     let books;
     if (search) {
-        
+        /*
         books = await Book.find({
             "nombre":new RegExp(search,'si')
-
         });
+        */
+       books = await Book.find(
+           { $or:[
+           {"nombre":new RegExp(search,'si')},
+           {"autor":new RegExp(search,'si')},
+           {"categorias":new RegExp(search,'si')}
+        ]
+        }
+           );
     }
     else {
         books = await Book.find();
