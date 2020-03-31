@@ -1,13 +1,14 @@
 const UserController = require("../controllers/userController");
+const authMiddleware = require('../middlewares/authMiddleware');
 
 module.exports = router => {
     router
         .route("/user")
-        .get(UserController.listUser)
+        .get(authMiddleware,UserController.listUser)
     router
         .route("/user/:UserId")
-        .get(UserController.findUser)
-        .delete(UserController.removeUser)
-        .put(UserController.changeUser);
+        .get(authMiddleware,UserController.findUser)
+        .delete(authMiddleware,UserController.removeUser)
+        .put(authMiddleware,UserController.changeUser);
 
 };

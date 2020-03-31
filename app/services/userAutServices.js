@@ -11,7 +11,7 @@ exports.authenticate = async (username, password) => {
     }
   
     const Result = await user.comparePassword(password);
-    console.log(Result);
+    //console.log(Result);
   
     if (!Result) {
       throw new Error("Invalid password");
