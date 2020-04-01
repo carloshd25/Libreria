@@ -42,7 +42,7 @@ exports.findBook = async (req, res) => {
 }
 
 exports.listBook = async (req, res) => {
-    let search=req.query.search;
+    let search=req.query.search ||'';
     let books =await BookService.listBook(search);
     
     if(!books){
