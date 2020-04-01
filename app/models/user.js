@@ -13,7 +13,15 @@ let userScheme=new mongoose.Schema({
     password:{
         type:String,
         required:true
-    }
+    },
+    favoritos:
+    [
+        {
+            type: mongoose.Schema.Types.ObjectId,
+            ref:'book'
+        }
+
+    ]
 });
 
 userScheme.methods.toJSON = function () {//trae los objetos de mongoose y los convierte a .json
