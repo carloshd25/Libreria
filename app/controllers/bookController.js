@@ -33,11 +33,18 @@ exports.changeBook = async (req, res) => {
 
 exports.findBook = async (req, res) => {
     let idBook = req.params.libroId;
-    let searchBook = await BookService.findBook(idBook);
+    let idUser = req.user;
+    var searchBook = await BookService.findBook(idBook);
     if (!searchBook) {
         res.status(401).send("book not found");
     }
     else {
+        if(idUser){
+            let validate = await BookService.validateFavorite(idUser, idBook);
+            searchBook=searchBook.toJSON();
+            Object.assign(searchBook, {isFavorite: validate.validacion});
+            
+        }
         res.status(200).send(searchBook);
     }
 }

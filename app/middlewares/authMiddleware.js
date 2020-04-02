@@ -1,21 +1,30 @@
 const jwt = require('jsonwebtoken');
-const config = require ('../configs/configs');
-const authException = require ('../exceptios/notAutExeption')
+const config = require('../configs/configs');
+const authException = require('../exceptios/notAutExeption');
+const Exception=require('./pathExceptios');
 
 
 module.exports = (req, res, next) => {
-    const token = req.headers ['authorization'];
-    //console.log(token);
+    const token = req.headers['authorization'];
+    const Path=(req.route.path);
+    const Method=(req.method);
 
-    if (!token) {
+    const exception=  Exception.exceptions(Path,Method);
+    const exc=exception.exc;
+    
+
+    if (!token && exc==false) {
+        console.log("no token");
         throw new authException();
     }
 
     jwt.verify(token, config.SECRET, (err, decToken) => {
-        if (err ) {
+        if (err && exc==false) {
+            console.log("error token");
             throw new authException();
         }
-        req.user = decToken.user;
+        if(!err)
+        {req.user = decToken.user;}
 
         next();
     });

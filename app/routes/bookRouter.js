@@ -8,7 +8,7 @@ module.exports = router => {
         .post(authMiddleware,BookController.createBook);
     router
         .route("/libro/:libroId")
-        .get(BookController.findBook)
+        .get(authMiddleware,BookController.findBook)
         .delete(authMiddleware,BookController.removeBook)
         .put(authMiddleware,BookController.changeBook);
     router

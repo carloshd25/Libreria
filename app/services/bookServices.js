@@ -34,31 +34,39 @@ exports.listBook = async (search) => {
     return books;
 };
 
-exports.addFavorite = async (idUser,book) => {
-    let users=await User.findById(idUser).populate({ path: "favoritos",model:Book, select: "nombre descripcion autor imagen categorias" });
+exports.addFavorite = async (idUser, book) => {
+    let users = await User.findById(idUser).populate({
+        path: "favoritos",
+        model: Book,
+        select: "nombre descripcion autor imagen categorias"
+    });
     users.favoritos.push(book);
     users.save();
-    
+
     return users;
 };
 
-exports.validateFavorite= async (idUser,idBook) => {
-    let users=await User.findById(idUser).findOne({"favoritos": idBook});
-    
-    if(!users){
-        return {validacion: false};
+exports.validateFavorite = async (idUser, idBook) => {
+    let users = await User.findById(idUser).findOne({ "favoritos": idBook });
+
+    if (!users) {
+        return { validacion: false };
     }
-    else{
-        return {validacion: true};
+    else {
+        return { validacion: true };
     }
-   
+
 };
 
-exports.removeFavorite = async (idUser,book) => {
-    let users=await User.findById(idUser).populate({ path: "favoritos",model:Book, select: "nombre descripcion autor imagen categorias" });
+exports.removeFavorite = async (idUser, book) => {
+    let users = await User.findById(idUser).populate({
+        path: "favoritos",
+        model: Book,
+        select: "nombre descripcion autor imagen categorias"
+    });
 
     users.favoritos.pull(book);
     users.save();
-    
+
     return users;
 };
