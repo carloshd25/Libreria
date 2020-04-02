@@ -16,6 +16,7 @@ module.exports = (req, res, next) => {
             throw new authException();
         }
         req.user = decToken.user;
+
         next();
     });
 };

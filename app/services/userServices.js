@@ -1,4 +1,5 @@
 const User = require("../models/user");
+const Book = require("../models/book");
 
 exports.createUser = async (user) => {
     let addUser = await User.create(user);
@@ -28,7 +29,7 @@ exports.listUser = async (username) => {
         });
     }
     else {
-        users = await User.find();
+        users = await User.find().populate({ path: "favoritos",model:Book, select: "nombre descripcion autor imagen categorias" });;
     }
     return users;
 };

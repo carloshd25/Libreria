@@ -1,4 +1,5 @@
 const Book = require("../models/book");
+const User = require("../models/user");
 
 exports.createBook = async (book) => {
     let addBook = await Book.create(book);
@@ -21,21 +22,6 @@ exports.findBook = async (idBook) => {
 }
 
 exports.listBook = async (search) => {
-    /*let books;
-    if (search) {
-       books = await Book.find(
-           { $or:[
-           {"nombre":new RegExp(search,'si')},
-           {"autor":new RegExp(search,'si')},
-           {"categorias":new RegExp(search,'si')}
-        ]
-        }
-           );
-    }
-    else {
-        books = await Book.find();
-    }
-    */
     let books = await Book.find(
         {
             $or: [
@@ -46,4 +32,33 @@ exports.listBook = async (search) => {
         }
     );
     return books;
+};
+
+exports.addFavorite = async (idUser,book) => {
+    let users=await User.findById(idUser).populate({ path: "favoritos",model:Book, select: "nombre descripcion autor imagen categorias" });
+    users.favoritos.push(book);
+    users.save();
+    
+    return users;
+};
+
+exports.validateFavorite= async (idUser,idBook) => {
+    let users=await User.findById(idUser).findOne({"favoritos": idBook});
+    
+    if(!users){
+        return {validacion: false};
+    }
+    else{
+        return {validacion: true};
+    }
+   
+};
+
+exports.removeFavorite = async (idUser,book) => {
+    let users=await User.findById(idUser).populate({ path: "favoritos",model:Book, select: "nombre descripcion autor imagen categorias" });
+
+    users.favoritos.pull(book);
+    users.save();
+    
+    return users;
 };

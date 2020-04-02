@@ -11,5 +11,11 @@ module.exports = router => {
         .get(BookController.findBook)
         .delete(authMiddleware,BookController.removeBook)
         .put(authMiddleware,BookController.changeBook);
+    router
+        .route("/libro/addfavorite/:libroId")
+        .post(authMiddleware,BookController.addFavorite);
+    router
+        .route("/libro/rmfavorite/:libroId")
+        .post(authMiddleware,BookController.removeFavorite);        
 
 };
