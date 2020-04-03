@@ -9,6 +9,6 @@ module.exports = router => {
         .route("/user/:UserId")
         .get(authMiddleware,UserController.findUser)
         .delete(authMiddleware,UserController.removeUser)
-        .put(authMiddleware,UserController.changeUser);
+        .patch(authMiddleware,UserController.changeUser);
 
 };

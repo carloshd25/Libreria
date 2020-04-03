@@ -10,7 +10,7 @@ module.exports = router => {
         .route("/libro/:libroId")
         .get(authMiddleware,BookController.findBook)
         .delete(authMiddleware,BookController.removeBook)
-        .put(authMiddleware,BookController.changeBook);
+        .patch(authMiddleware,BookController.changeBook);
     router
         .route("/libro/addfavorite/:libroId")
         .post(authMiddleware,BookController.addFavorite);
