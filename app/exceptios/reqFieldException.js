@@ -1,7 +1,7 @@
 class reqFieldException extends Error {
-    constructor (field){
-        super (`${field} es requerido`);
-        this.status = 404;
+    constructor (mesage,status){
+        super (mesage);
+        this.status = status;
     };
 };
 
