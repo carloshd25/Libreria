@@ -26,8 +26,6 @@ exports.changeUser = async (idUser, user) => {
         user.password = hashedPassword;
     }
 
-    
-
     let updateUser = await User.findByIdAndUpdate(idUser, user, { new: true });
     return updateUser;
 };
