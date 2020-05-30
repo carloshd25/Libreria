@@ -31,7 +31,7 @@ exports.changeUser = async (idUser, user) => {
 };
 
 exports.findUser = async (idUser) => {
-    let searchUser = await User.findById(idUser);
+    let searchUser = await User.findById(idUser).populate({path:"favoritos",model:Book,select:"id nombre descripcion autor imagen categorias"});
     return searchUser;
 }
 

@@ -7,9 +7,12 @@ const config=require('./app/configs/configs');// se importa el config
 const router=express.Router();// El rorute es el que le indica a Nod como va a responder a cada peticion
 const routes=require('./app/routes/index'); //importamos el archivo index
 
+const cors = require('cors');
 
 errorMiddleware = require('./app/middlewares/errorMiddleware');
 require ('express-async-errors');
+
+app.use(cors({origin: '*'}));
 
 app.use(bodyParser.urlencoded({
     extended:true

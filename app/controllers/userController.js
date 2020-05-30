@@ -29,7 +29,7 @@ exports.changeUser = async (req, res) => {
 
 exports.findUser = async (req, res) => {
     let idUser=req.params.UserId;
-    let searchUser=await UserService.findUser(idUser);
+    let searchUser=await (await UserService.findUser(idUser));
     if(!searchUser){
         throw new reqException('User not found');
         //res.status(401).send("User not found");
